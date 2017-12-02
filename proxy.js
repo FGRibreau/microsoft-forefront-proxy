@@ -24,7 +24,6 @@ function doRequest(options) {
             return false;
           },
           gzip: false,
-          jar: true,
           // add this cipthers otherwise ISS yield socket hang up error.
           ciphers: 'DES-CBC3-SHA',
           headers: {
@@ -61,11 +60,12 @@ app.get('/', function(req, res) {
 
   const jar = request.jar();
 
-  login(req.query.url, req.query.auth)
+  login(req.query.url, req.query.auth, { jar })
     .then(() =>
       doRequest({
         method: 'get',
         url: req.query.url,
+        jar: jar,
       })
     )
     .then(({ response, body }) => {
@@ -80,29 +80,35 @@ app.get('/', function(req, res) {
       res.status(502).send(error);
     });
 
-  function login(url, auth) {
+  function login(url, auth, options = {}) {
     const [user, pass] = auth.split(':');
 
     debug('Querying %s', url);
 
     const { protocol, host, path, pathname } = parse(url);
 
-    return doRequest({
-      method: 'post',
-      url: `${protocol}//${host}/CookieAuth.dll?Logon`,
-      form: Object.assign(
+    return doRequest(
+      Object.assign(
         {
-          curl: encode(path),
-          flags: 0,
-          forcedownlevel: 0,
-          formdir: 13,
+          method: 'post',
+          url: `${protocol}//${host}/CookieAuth.dll?Logon`,
+          jar: jar,
+          form: Object.assign(
+            {
+              curl: encode(path),
+              flags: 0,
+              forcedownlevel: 0,
+              formdir: 13,
+            },
+            {
+              username: user,
+              password: pass,
+            }
+          ),
         },
-        {
-          username: user,
-          password: pass,
-        }
-      ),
-    });
+        options
+      )
+    );
   }
 });
 
