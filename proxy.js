@@ -29,8 +29,15 @@ function doRequest(options) {
           ciphers: 'DES-CBC3-SHA',
           headers: {
             // simulate a valid user-agent otherwise IIS blocks the request
-            'User-Agent':
-              'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
+            'User-Agent': `Mozilla/5.0 (Macintosh; Intel Mac OS X ${Math.round(
+              Math.random() * 10
+            )}) AppleWebKit/${Math.round(
+              Math.random() * 1000
+            )}.36 (KHTML, like Gecko) Chrome/61.0.${Math.round(
+              Math.random() * 1000
+            )}.100 Safari/${Math.round(Math.random() * 1000)}.${Math.round(
+              Math.random() * 100
+            )}`,
           },
         },
         options
@@ -95,17 +102,6 @@ app.get('/', function(req, res) {
           password: pass,
         }
       ),
-      headers: {
-        'User-Agent': `Mozilla/5.0 (Macintosh; Intel Mac OS X ${Math.round(
-          Math.random() * 10
-        )}) AppleWebKit/${Math.round(
-          Math.random() * 1000
-        )}.36 (KHTML, like Gecko) Chrome/61.0.${Math.round(
-          Math.random() * 1000
-        )}.100 Safari/${Math.round(Math.random() * 1000)}.${Math.round(
-          Math.random() * 100
-        )}`,
-      },
     });
   }
 });
