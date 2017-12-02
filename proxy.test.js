@@ -7,7 +7,7 @@ assert(process.env.TEST_AUTH);
 describe('loading express', function() {
   var server;
   beforeEach(function() {
-    server = require('./proxy');
+    server = require('./proxy.js');
   });
   afterEach(function() {
     server.close();
@@ -16,11 +16,10 @@ describe('loading express', function() {
   it('responds to /?url', function testSlash(done) {
     request(server)
       .get(
-        `/?url=${encodeURIComponent(process.env.TEST_URL)}&auth=${process.env
-          .TEST_AUTH}`
+        `/?url=${encodeURIComponent(process.env.TEST_URL)}&auth=${
+          process.env.TEST_AUTH
+        }`
       )
       .expect(200, done);
   });
 });
-
-// https://redmine.ouest-france.fr/CookieAuth.dll?GetLogon?curl=Z2F&reason=0&formdir=13

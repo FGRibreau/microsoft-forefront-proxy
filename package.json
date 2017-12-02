@@ -1,15 +1,16 @@
 {
   "name": "microsoft-forefront-proxy",
   "version": "1.0.0",
-  "private": true,
-  "description": "",
+  "description":
+    "Quick and dirty proxy for Microsoft ISA-server / Microsoft Forefront",
   "main": "proxy.js",
   "scripts": {
     "start": "node proxy.js",
     "test": "jest",
     "test:watch": "npm run --silent test -- --watch"
   },
-  "author": "Francois-Guillaume Ribreau <npm@fgribreau.com> (http://fgribreau.com/)",
+  "author":
+    "Francois-Guillaume Ribreau <npm@fgribreau.com> (http://fgribreau.com/)",
   "license": "MIT",
   "dependencies": {
     "debug": "^3.1.0",
@@ -19,5 +20,6 @@
   "devDependencies": {
     "jest": "^20.0.4",
     "supertest": "^3.0.0"
-  }
+  },
+  "bin": { "microsoft-forefront-proxy": "./proxy" }
 }
