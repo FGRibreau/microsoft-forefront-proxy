@@ -1,6 +1,6 @@
 {
   "name": "microsoft-forefront-proxy",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Quick and dirty proxy for Microsoft ISA-server / Microsoft Forefront",
   "main": "proxy.js",
   "scripts": {
