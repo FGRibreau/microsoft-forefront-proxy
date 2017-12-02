@@ -9,10 +9,10 @@
     "test": "jest",
     "test:watch": "npm run --silent test -- --watch"
   },
-  "author":
-    "Francois-Guillaume Ribreau <npm@fgribreau.com> (http://fgribreau.com/)",
+  "author": "Francois-Guillaume Ribreau <npm@fgribreau.com> (http://fgribreau.com/)",
   "license": "MIT",
   "dependencies": {
+    "debug": "^3.1.0",
     "express": "^4.15.3",
     "request": "^2.81.0"
   },

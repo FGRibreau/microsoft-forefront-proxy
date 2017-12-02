@@ -2,6 +2,7 @@ const express = require('express');
 const { parse, format } = require('url');
 const qs = require('querystring');
 const request = require('request');
+const debug = require('debug')('proxy');
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -20,7 +21,6 @@ function doRequest(options) {
       Object.assign(
         {
           followRedirect: response => {
-            // console.log('redirect ?', response);
             return false;
           },
           gzip: false,
@@ -62,6 +62,7 @@ app.get('/', function(req, res) {
       })
     )
     .then(({ response, body }) => {
+      debug('Got %s <= %s', response.statusCode, req.query.url);
       res
         .status(response.statusCode)
         .set(response.headers)
@@ -75,7 +76,7 @@ app.get('/', function(req, res) {
   function login(url, auth) {
     const [user, pass] = auth.split(':');
 
-    console.log('querying %s', url);
+    debug('Querying %s', url);
 
     const { protocol, host, path, pathname } = parse(url);
 
