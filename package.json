@@ -1,0 +1,23 @@
+{
+  "name": "microsoft-forefront-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "main": "proxy.js",
+  "scripts": {
+    "start": "node proxy.js",
+    "test": "jest",
+    "test:watch": "npm run --silent test -- --watch"
+  },
+  "author":
+    "Francois-Guillaume Ribreau <npm@fgribreau.com> (http://fgribreau.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "jest": "^20.0.4",
+    "supertest": "^3.0.0"
+  }
+}
