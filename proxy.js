@@ -52,7 +52,7 @@ function doRequest(options) {
   });
 }
 
-app.get('/', function(req, res) {
+app.all('/', function(req, res) {
   if (!req.query.url || !req.query.auth) {
     res.status(400).send('`url` and/or `auth` query parameters are missing.');
     return;
@@ -60,12 +60,21 @@ app.get('/', function(req, res) {
 
   const jar = request.jar();
 
+  const headers = {};
+
+  // @todo should we forward every headers?
+  if(req.headers['content-type']){
+    headers['content-type'] = req.headers['content-type'];
+  }
+
   login(req.query.url, req.query.auth, { jar })
     .then(() =>
       doRequest({
-        method: 'get',
+        method: req.method,
         url: req.query.url,
         jar: jar,
+        body: req.body,
+        headers: headers,
       })
     )
     .then(({ response, body }) => {
