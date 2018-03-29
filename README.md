@@ -6,7 +6,7 @@ Quick and dirty proxy for Microsoft ISA-server / Microsoft Forefront.
 
 * [x] Bypass ISA authentication form
 * [x] Forward GETs
-* [ ] Forward POSTs/PUTs/PATCHs
+* [x] Forward POSTs/PUTs/PATCHs
 
 ## Install
 
